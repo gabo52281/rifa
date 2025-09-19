@@ -1,9 +1,14 @@
+
 import streamlit as st
 import gspread
+import json
 
-gc = gspread.service_account(filename="ringed-empire-426118-i0-2990558882a6.json")
+# Leer el secreto desde Streamlit Cloud
+service_account_info = json.loads(st.secrets["google"]["service_account_json"])
+gc = gspread.service_account_from_dict(service_account_info)
 sh = gc.open("MiBaseDeDatos")
 worksheet = sh.sheet1
+
 
 data = worksheet.get_all_records()
 
