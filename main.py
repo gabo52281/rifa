@@ -12,7 +12,17 @@ worksheet = sh.sheet1
 
 data = worksheet.get_all_records()
 
-st.title("Rifa - Asigna y quita nombres")
+st.title("Rifa andrea - Asigna y quita nombres")
+
+# ✅ Calcular totales
+total_vendidos = sum(1 for row in data if row["nombre"])  # con nombre asignado
+total_libres = sum(1 for row in data if not row["nombre"])  # sin nombre
+
+# Mostrar totales
+st.subheader("📊 Totales")
+col1, col2 = st.columns(2)
+col1.metric("Números vendidos", total_vendidos)
+col2.metric("Números libres", total_libres)
 
 # Filtro por estado
 estado = st.radio("Filtrar por:", ["Todos", "Libres", "Asignados"])
