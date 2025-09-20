@@ -12,7 +12,7 @@ worksheet = sh.sheet1
 
 data = worksheet.get_all_records()
 
-st.title("Rifa - Asigna y quita nombres")
+st.title("Rifa andrea - Asigna y quita nombres")
 
 # Filtro por estado
 estado = st.radio("Filtrar por:", ["Todos", "Libres", "Asignados"])
