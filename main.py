@@ -3,6 +3,25 @@ import streamlit as st
 import gspread
 import json
 
+
+PASSWORD = "andrea"  # <-- cámbiala por una más segura
+
+if "autenticado" not in st.session_state:
+    st.session_state.autenticado = False
+
+def solicitar_contraseña():
+    st.warning("⚠️ Necesitas contraseña para editar")
+    pwd = st.text_input("Introduce la contraseña:", type="password")
+    if st.button("Entrar"):
+        if pwd == PASSWORD:
+            st.session_state.autenticado = True
+            st.success("✅ Acceso concedido. Ahora puedes editar.")
+            st.rerun()
+        else:
+            st.error("❌ Contraseña incorrecta")
+
+
+
 # Leer el secreto desde Streamlit Cloud
 service_account_info = json.loads(st.secrets["google"]["service_account_json"])
 gc = gspread.service_account_from_dict(service_account_info)
